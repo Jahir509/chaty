@@ -32,7 +32,9 @@ const messages =
         }
     ]
 app.get('/messages',(req,res)=>{
-    Message.find()
+    Message
+        .find()
+        .sort({_id:-1})
         .then(data=>{
             //console.log(data);
             res.send({
