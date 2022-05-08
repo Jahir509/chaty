@@ -1,10 +1,11 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const http  = require('http').Server(app);
 const io = require('socket.io')(http);
 const mongoose = require('mongoose');
-const dbUrl = "mongodb+srv://jahir509:JLAlOUkhBrEaxKHp@cluster0.0vyli.mongodb.net/chaty?retryWrites=true&w=majority";
+const dbUrl = process.env.databaseUri;
 // this is for serving static file in our node application
 app.use(express.static(__dirname));
 app.use(bodyParser.json());
@@ -31,10 +32,9 @@ const messages =
         }
     ]
 app.get('/messages',(req,res)=>{
-        console.log('I am here')
     Message.find()
         .then(data=>{
-            console.log(data);
+            //console.log(data);
             res.send({
                 messages:data
             })
@@ -85,7 +85,7 @@ const server = http.listen(3000,()=>{
 mongoose
     .connect(dbUrl)
     .then(result => {
-        http.listen(3000);
+        http.listen(process.env.port);
         console.log('DB is Connected')
     })
     .catch(err => {
