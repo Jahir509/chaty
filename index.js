@@ -85,7 +85,7 @@ const server = http.listen(3000,()=>{
 mongoose
     .connect(dbUrl)
     .then(result => {
-        http.listen(process.env.port || 5000);
+        http.listen(process.env.PORT || 5000);
         console.log('DB is Connected')
     })
     .catch(err => {
