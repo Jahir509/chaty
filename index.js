@@ -6,6 +6,24 @@ const http  = require('http').Server(app);
 const io = require('socket.io')(http);
 const mongoose = require('mongoose');
 const dbUrl = process.env.databaseUri;
+
+const cors = require("cors");
+const corsOpts = {
+    origin: '*',
+
+    methods: [
+        'GET',
+        'POST',
+        'PUT',
+        'DELETE'
+    ],
+
+    allowedHeaders: [
+        'Content-Type',
+    ],
+};
+
+app.use(cors(corsOpts));
 // this is for serving static file in our node application
 app.use(express.static(__dirname));
 app.use(bodyParser.json());
