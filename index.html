@@ -59,14 +59,14 @@
         `)
     }
     function getMessages(){
-        $.get('https://secret-fortress-33180.herokuapp.com/messages',(data)=>{
+        $.get('http://localhost:3000/messages',(data)=>{
             data.messages.map(x=>{
                addMessages(x)
             })
         })
     }
     function postMessage(message){
-        $.post('https://secret-fortress-33180.herokuapp.com/messages',message)
+        $.post('http://localhost:3000/messages',message)
     }
 </script>
 </body>

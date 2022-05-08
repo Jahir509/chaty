@@ -47,6 +47,9 @@ app.get('/messages',(req,res)=>{
 })
 
 app.post('/messages',(req,res)=>{
+    if(!req.body.name && !req.body.message){
+        return res.sendStatus(201)
+    }
     const message = new Message({
         name:req.body.name,
         message:req.body.message
@@ -54,6 +57,7 @@ app.post('/messages',(req,res)=>{
     message
         .save()
         .then(data=>{
+            //console.log(data)
             messages.push(req.body);
             io.emit('message',req.body);
             res.sendStatus(200)
